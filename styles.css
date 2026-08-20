@@ -1,0 +1,201 @@
+/* ═══════════════════════════════════════════
+   HAPPY BIRTHDAY, MICHAEL
+   Pixel-grid Swiss, one page, no scroll-hunting.
+   ═══════════════════════════════════════════ */
+
+:root{
+  --paper:#EDEBEB;
+  --ink:#001B1F;
+  --muted:rgba(0,27,31,.5);
+  --red:#7568DC;
+  --blue:#BAFDC2;
+  --neon:#A1F300;
+  --yellow:#00BE93;
+  --teal:#004652;
+
+  --line:rgba(0,27,31,.14);
+  --line-2:rgba(0,27,31,.07);
+
+  --cell:14px;
+  --gutter:70px;
+  --maxw:1200px;
+  --readw:46ch;
+
+  --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,monospace;
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+
+  --out:cubic-bezier(.16,1,.3,1);
+}
+
+@media(max-width:680px){ :root{ --gutter:20px; --cell:12px; } }
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ -webkit-text-size-adjust:100%; }
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:400;
+  font-size:16px;
+  line-height:1.5;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+h1{ margin:0; font-weight:500; }
+p{ margin:0; }
+strong{ font-weight:700; }
+
+/* ── Page pixel grid ─────────────────────── */
+.paper{
+  position:fixed; inset:0; z-index:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(90deg, var(--line-2) 1px, transparent 1px),
+    linear-gradient(       var(--line-2) 1px, transparent 1px);
+  background-size:var(--cell) var(--cell);
+}
+body > *:not(.paper){ position:relative; z-index:1; }
+
+.wrap{ width:100%; max-width:var(--maxw); margin:0 auto; padding-inline:var(--gutter); }
+
+/* ── Mono kicker label ───────────────────── */
+.klabel{
+  display:block;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ═══════════ MASTHEAD ═══════════ */
+.masthead{
+  display:grid; grid-template-columns:1fr auto 1fr;
+  align-items:center; gap:24px;
+  padding:12px var(--gutter);
+  border-bottom:1px solid var(--line);
+}
+.masthead p{ font-size:10px; line-height:1.45; margin:0; }
+.masthead .mh-r{ text-align:right; font-family:var(--mono); letter-spacing:.06em; }
+
+.wmark{ display:grid; grid-template-columns:repeat(2,7px); gap:2px; }
+.wmark .px{ width:7px; height:7px; background:var(--c); }
+.wmark:hover .px{ animation:blink .6s steps(2) infinite; }
+.wmark .px:nth-child(2){ animation-delay:.1s; }
+.wmark .px:nth-child(3){ animation-delay:.2s; }
+.wmark .px:nth-child(4){ animation-delay:.3s; }
+@keyframes blink{ 50%{ opacity:.2; } }
+
+@media(max-width:680px){
+  .masthead{ grid-template-columns:1fr auto; row-gap:14px; }
+  .masthead .mh-c{ order:-1; grid-column:1/-1; justify-self:center; }
+}
+
+/* ═══════════ HERO ═══════════ */
+.hero{
+  position:relative;
+  padding-block:calc(var(--cell)*4);
+  min-height:clamp(560px,86vh,980px);
+  display:flex; flex-direction:column; justify-content:center;
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+
+.hgrid{ position:relative; z-index:1; }
+
+.htitle{
+  margin-top:calc(var(--cell));
+  font-size:clamp(52px,10.5vw,132px);
+  line-height:.88;
+  letter-spacing:-.035em;
+  font-weight:500;
+  text-transform:uppercase;
+}
+.htitle .accent{ color:var(--red); }
+
+.hdate{ margin-top:calc(var(--cell)*1.5); }
+
+.hbody{
+  margin-top:calc(var(--cell)*2.5);
+  display:grid; gap:calc(var(--cell)*1.1);
+  max-width:var(--readw);
+}
+.hlede{ font-size:clamp(16px,1.7vw,19px); line-height:1.55; }
+.hlede strong{ color:var(--red); }
+
+.hnote{
+  margin-top:calc(var(--cell));
+  font-family:var(--mono); font-size:11px;
+  letter-spacing:.06em; color:var(--muted);
+  text-transform:uppercase;
+}
+
+/* Reveal the hero in steps, like the original */
+.klabel,.htitle,.hbody p{ animation:stepIn .6s steps(4) both; }
+.htitle{ animation-delay:.08s; }
+.hdate{ animation-delay:.16s; }
+.hbody p:nth-child(1){ animation-delay:.22s; }
+.hbody p:nth-child(2){ animation-delay:.28s; }
+.hbody p:nth-child(3){ animation-delay:.34s; }
+.hbody p:nth-child(4){ animation-delay:.40s; }
+.hbody p:nth-child(5){ animation-delay:.46s; }
+@keyframes stepIn{ from{ opacity:0; transform:translateY(calc(var(--cell)*1.5)); } }
+
+/* ── Confetti squares, scattered like the reference ─────── */
+.confetti{
+  position:absolute; left:var(--x); top:var(--y);
+  width:8px; height:8px; background:var(--c);
+  z-index:0;
+  animation:twinkle 2.4s ease-in-out infinite;
+  animation-delay:var(--d);
+}
+@keyframes twinkle{ 0%,100%{ opacity:.55; transform:translateY(0); } 50%{ opacity:1; transform:translateY(-4px); } }
+@media(prefers-reduced-motion:reduce){ .confetti{ animation:none; } }
+
+/* ── Pixel wordmark strip ────────────────── */
+.wordmark{
+  border-top:1px solid var(--line);
+  padding-block:calc(var(--cell)*3);
+  overflow:hidden;
+}
+#wordmark{
+  display:block; width:100%;
+  height:clamp(110px,16vw,210px);
+}
+
+@media(prefers-reduced-motion:reduce){
+  .klabel,.htitle,.hbody p{ animation:none; opacity:1; transform:none; }
+}
+
+/* ═══════════ NOW PLAYING (hidden) ═══════════ */
+/* Visually hidden rather than display:none — a display:none iframe risks
+   the browser deprioritising it; this keeps it "on screen" at 1x1px so
+   playback isn't at the mercy of that, while showing nothing to look at. */
+body > .nowplaying{
+  position:fixed; z-index:-1;
+  width:1px; height:1px;
+  overflow:hidden;
+  opacity:0;
+  pointer-events:none;
+}
+
+/* ═══════════ CURSOR: THE GLOW FIELD ═══════════ */
+/* The same heat-brush that lights up the wordmark below, run across the
+   whole page as the cursor itself: cells ignite warm near the pointer and
+   cool back to nothing, snapped to the same grid as the paper background. */
+@media(pointer:fine){
+  html.has-glow, html.has-glow *{ cursor:none !important; }
+}
+
+body > .glow-layer{
+  position:fixed; inset:0;
+  width:100vw; height:100vh;
+  z-index:1;
+  pointer-events:none;
+}
+
+@media(pointer:coarse){ .glow-layer{ display:none; } }
