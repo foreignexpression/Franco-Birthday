@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday, Franco</title>
+<meta name="description" content="Happy Birthday to our favourite wave chaser, Franco — from the Defijn Team.">
+<meta name="theme-color" content="#EDEBEB">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 12 12%22><rect width=%2212%22 height=%2212%22 fill=%22%23001B1F%22/><rect x=%222%22 y=%225%22 width=%223%22 height=%223%22 fill=%22%2300BE93%22/><rect x=%227%22 y=%223%22 width=%223%22 height=%223%22 fill=%22%237568DC%22/></svg>">
+</head>
+<body>
+
+<div class="paper" aria-hidden="true"></div>
+<canvas id="glow" class="glow-layer" aria-hidden="true"></canvas>
+
+<!-- ══════════ MASTHEAD ══════════ -->
+<header class="masthead">
+  <p class="mh-l">Defijn Team<br>For Franco</p>
+  <div class="mh-c">
+    <span class="wmark" aria-label="Defijn">
+      <span class="px" style="--c:#001B1F"></span><span class="px" style="--c:#BAFDC2"></span><span class="px" style="--c:#7568DC"></span><span class="px" style="--c:#A1F300"></span>
+    </span>
+  </div>
+  <p class="mh-r">20 · 08<br>2026</p>
+</header>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="hero">
+  <div class="wrap hgrid">
+    <div class="hcol hcol--main">
+      <p class="klabel">A little something from the Defijn Team</p>
+      <h1 class="htitle">Happy<br>Birthday<span class="accent">.</span></h1>
+      <p class="klabel hdate">Thursday 20 August — for Franco</p>
+
+      <div class="hbody">
+        <p class="hlede">Happy Birthday to our favourite <strong>wave chaser</strong>!</p>
+        <p class="hlede">Hope today brings clean sets, warm water, and not a single flat spell in sight 🏄</p>
+        <p class="hlede">Thanks for always keeping the vibes high and the stoke higher — you make the crew better just by paddling out with us.</p>
+        <p class="hlede">Here's to catching every wave that comes your way this year, and a few gnarly ones too. Have the best one, Franco!</p>
+        <p class="hnote">With love, the Defijn Team</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ WORDMARK ══════════ -->
+<section class="wordmark" aria-label="Happy Birthday Franco">
+  <canvas id="wordmark" aria-hidden="true"></canvas>
+</section>
+
+<!-- ══════════ NOW PLAYING ══════════ -->
+<!-- Hidden — kept alive only so it can be told to play on the first tap/click/key.
+     YouTube over Spotify: it plays the full track for every visitor, logged in
+     or not, with no 30-second-preview ceiling. -->
+<div class="nowplaying" aria-hidden="true">
+  <div id="yt-embed"></div>
+</div>
+<script src="https://www.youtube.com/iframe_api" async></script>
+<script>
+  window.onYouTubeIframeAPIReady = () => {
+    window.ytPlayer = new YT.Player('yt-embed', {
+      videoId: 't0vHiKxpXos',
+      playerVars: {
+        autoplay: 0, controls: 0, disablekb: 1, fs: 0,
+        modestbranding: 1, rel: 0, iv_load_policy: 3, playsinline: 1
+      },
+      events: {
+        onReady: () => { if (window.__wantsPlay) window.ytPlayer.playVideo(); }
+      }
+    });
+  };
+</script>
+
+<script src="main.js"></script>
+</body>
+</html>
